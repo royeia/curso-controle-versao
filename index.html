@@ -12,6 +12,8 @@
             --text-color: #333;
             --border-color: #e1e4e8;
             --code-bg-color: #f6f8fa;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
         }
 
         body {
@@ -29,33 +31,35 @@
 
         .overlay {
             background-color: rgba(255, 255, 255, 0.97);
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        header, .module, .aula {
+        header, .module, .aula, .section {
             background-color: var(--background-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 25px;
+            padding: 30px;
             margin-bottom: 25px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: var(--secondary-color);
             border-bottom: 2px solid var(--primary-color);
             padding-bottom: 10px;
             margin-top: 0;
         }
         
-        h1 { font-size: 2.2em; }
-        h2 { font-size: 1.8em; }
-        h3 { font-size: 1.4em; }
+        h1 { font-size: 2.4em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.6em; }
+        h4 { font-size: 1.3em; }
 
         img {
             max-width: 100%;
@@ -72,13 +76,159 @@
             background-color: var(--code-bg-color);
             padding: 0.2em 0.4em;
             margin: 0;
-            font-size: 85%;
+            font-size: 90%;
             border-radius: 3px;
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: #e83e8c;
+        }
+
+        pre {
+            background-color: var(--code-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-color);
         }
 
         strong {
             color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .destaque {
+            background-color: #fff3cd;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .sucesso {
+            background-color: #d4edda;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .fluxo-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .step-card h4 {
+            color: white;
+            border: none;
+            margin: 0 0 10px 0;
+            padding: 0;
+        }
+
+        .step-number {
+            background: rgba(255,255,255,0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--code-bg-color);
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .referencias {
+            background-color: var(--code-bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .referencias ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .referencias li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .referencias li:last-child {
+            border-bottom: none;
+        }
+
+        .command-example {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-family: "Consolas", "Monaco", monospace;
+        }
+
+        .command-example .prompt {
+            color: #4ec9b0;
+        }
+
+        .command-example .command {
+            color: #dcdcaa;
+        }
+
+        .comparison-table {
+            margin: 30px 0;
         }
     </style>
 </head>
@@ -94,62 +244,839 @@
             <!-- MÓDULO 1 -->
             <div class="module">
                 <h2>Módulo 1: O Problema - Por que precisamos organizar o trabalho?</h2>
+                
                 <div class="aula">
                     <h3>Aula 1: O caos dos "arquivos finais"</h3>
-                    <p>Imagine a seguinte situação: a equipe de geologia precisa atualizar um mapa de sondagem crucial para uma nova fase de exploração. Surgem arquivos como <code>mapa_final.docx</code>, <code>mapa_final_agora_vai.docx</code>, <code>mapa_versao_Joao.docx</code>. Qual é o correto? Esse é o problema da falta de um <strong>"ponto central da verdade"</strong>. Trabalhar com cópias de arquivos gera confusão, retrabalho e um alto risco de usar informações desatualizadas.</p>
+                    <p>Imagine a seguinte situação: a equipe de geologia precisa atualizar um mapa de sondagem crucial para uma nova fase de exploração.</p>
+                    
+                    <ul>
+                        <li>Ana, a geóloga líder, cria o arquivo <code>mapa_sondagem_v1.docx</code></li>
+                        <li>João, especialista em geofísica, revisa e salva como <code>mapa_sondagem_revisado_Joao.docx</code></li>
+                        <li>Carla, da equipe de planejamento, adiciona notas sobre a operação e salva como <code>mapa_sondagem_FINAL.docx</code></li>
+                        <li>No dia seguinte, Ana faz uma última correção e envia por e-mail o arquivo <code>mapa_sondagem_FINAL_agora_vai.docx</code></li>
+                    </ul>
+
+                    <p><strong>Qual é a versão correta?</strong> A de Carla ou a última de Ana? O que João alterou foi incluído? Esse é o problema da falta de um <strong>"ponto central da verdade"</strong>. Trabalhar com cópias de arquivos em pastas e e-mails gera confusão, retrabalho e um alto risco de usar informações desatualizadas, o que em um projeto de mineração pode ter consequências sérias.</p>
+                    
                     <img src="images/aula1_caos_arquivos.png" alt="Fluxograma caótico com vários nomes de arquivos confusos.">
+                    
+                    <div class="destaque">
+                        <strong>⚠️ Problemas comuns sem controle de versão:</strong>
+                        <ul>
+                            <li>Perda de trabalho quando alguém sobrescreve o arquivo errado</li>
+                            <li>Impossibilidade de saber quem fez qual alteração</li>
+                            <li>Dificuldade em reverter mudanças problemáticas</li>
+                            <li>Conflitos quando duas pessoas editam o mesmo arquivo simultaneamente</li>
+                            <li>Falta de rastreabilidade e auditoria</li>
+                        </ul>
+                    </div>
                 </div>
+
                 <div class="aula">
                     <h3>Aula 2: O que é Controle de Versão?</h3>
-                    <p>Para resolver esse caos, usamos um <strong>Sistema de Controle de Versão (VCS)</strong>. Pense nele como um <strong>"livro de registros geológico"</strong>. Cada alteração é registrada, com data, autor e descrição. Nada é perdido, apenas novas camadas são adicionadas. O sistema mais usado no mundo para isso se chama <strong>Git</strong>.</p>
+                    <p>Para resolver esse caos, usamos um <strong>Sistema de Controle de Versão (VCS - Version Control System)</strong>. Pense nele como um <strong>"livro de registros geológico"</strong> ou um diário de bordo de uma perfuração.</p>
+
+                    <div class="destaque">
+                        <strong>Analogia:</strong> Cada vez que um geólogo coleta uma amostra de rocha de um furo, ele não joga a amostra antiga fora. Ele a armazena, cataloga e descreve: profundidade, data, composição, nome do responsável. Todas as amostras (camadas) formam um histórico completo da perfuração. Se for preciso reavaliar uma camada específica, basta ir ao registro e pegá-la.
+                    </div>
+
+                    <p>É exatamente isso que um VCS faz com arquivos. Ele registra cada alteração, quem a fez, quando e por quê. Nada é perdido. Você pode "viajar no tempo" e ver exatamente como um arquivo era em qualquer ponto da história do projeto.</p>
+
+                    <p>O sistema mais usado no mundo para isso se chama <strong>Git</strong>.</p>
+                    
                     <img src="images/aula2_camadas_versao.png" alt="Ilustração de camadas de rocha, cada uma com uma etiqueta de versão.">
+
+                    <div class="sucesso">
+                        <strong>✅ Benefícios do Controle de Versão:</strong>
+                        <ul>
+                            <li><strong>Histórico completo:</strong> Cada mudança é registrada permanentemente</li>
+                            <li><strong>Rastreabilidade:</strong> Saber quem fez o quê, quando e por quê</li>
+                            <li><strong>Reversibilidade:</strong> Voltar para qualquer versão anterior a qualquer momento</li>
+                            <li><strong>Colaboração segura:</strong> Múltiplas pessoas trabalhando simultaneamente</li>
+                            <li><strong>Branches:</strong> Experimentar sem afetar a versão principal</li>
+                            <li><strong>Backup distribuído:</strong> Cada colaborador tem uma cópia completa</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <!-- MÓDULO 2 -->
             <div class="module">
                 <h2>Módulo 2: A Solução - Conhecendo as Ferramentas</h2>
+                
                 <div class="aula">
                     <h3>Aula 3: O "Armazém Central" e as "Cópias Locais" (Repositórios)</h3>
-                    <p>O <strong>Repositório Remoto</strong> (no GitHub) é o "arquivo técnico central". Cada colaborador pega uma cópia para trabalhar em sua mesa, o <strong>Repositório Local</strong>, sem alterar o original diretamente.</p>
+                    <p>O Git funciona com um modelo "distribuído". O que isso significa?</p>
+
+                    <ul>
+                        <li><strong>Repositório Remoto:</strong> Existe um "arquivo técnico central" na sede da mineradora. Este é o nosso <strong>Repositório Remoto</strong> (no GitHub, por exemplo). Ele contém a versão oficial e completa de todos os documentos do projeto.</li>
+                        <li><strong>Repositório Local:</strong> Quando um engenheiro precisa trabalhar em uma planta, ele não a edita diretamente no arquivo central. Ele solicita uma cópia autenticada e a leva para sua mesa. Essa cópia é o seu <strong>Repositório Local</strong>.</li>
+                    </ul>
+
+                    <p>Ele pode fazer todas as anotações e rascunhos que quiser em sua cópia local, sem medo de atrapalhar o trabalho dos outros ou de estragar o documento oficial. O Git garante que a cópia local dele contenha todo o histórico do projeto até aquele momento.</p>
+                    
                     <img src="images/aula3_repositorios.png" alt="Diagrama mostrando um repositório remoto central e vários repositórios locais.">
+
+                    <h4>Diferenças entre sistemas Centralizados e Distribuídos</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Sistema Centralizado (ex: SVN)</th>
+                                <th>Sistema Distribuído (ex: Git)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Histórico</strong></td>
+                                <td>Apenas no servidor central</td>
+                                <td>Cópia completa em cada máquina</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trabalho offline</strong></td>
+                                <td>Limitado</td>
+                                <td>Totalmente funcional</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Velocidade</strong></td>
+                                <td>Depende da rede</td>
+                                <td>Operações locais são instantâneas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Backup</strong></td>
+                                <td>Ponto único de falha</td>
+                                <td>Cada clone é um backup completo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Branches</strong></td>
+                                <td>Pesadas e lentas</td>
+                                <td>Leves e rápidas</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                 <div class="aula">
+
+                <div class="aula">
                     <h3>Aula 4: Apresentando o Git e o GitHub</h3>
-                    <p><strong>Git</strong> é a ferramenta que você instala em seu computador para controlar as versões. <strong>GitHub</strong> é a plataforma online, a "sala de projetos", onde hospedamos os repositórios para colaborar em equipe.</p>
+                    <p>É importante não confundir os dois:</p>
+
+                    <ul>
+                        <li><strong>Git:</strong> É o sistema, a ferramenta, o "método de trabalho" que você instala no seu computador para controlar as versões dos arquivos. Ele é o motor por trás de tudo. Foi criado por Linus Torvalds em 2005 para gerenciar o desenvolvimento do kernel Linux.</li>
+                        <li><strong>GitHub:</strong> É uma plataforma online, um site, que serve como o "arquivo técnico central". É o lugar onde hospedamos nossos repositórios remotos para que toda a equipe possa colaborar. Pense no GitHub como a <strong>"sala de projetos online"</strong>, onde todos se encontram para discutir e integrar suas mudanças.</li>
+                    </ul>
+
+                    <p>Existem outras plataformas como o GitHub, por exemplo, <strong>GitLab</strong> e <strong>Bitbucket</strong>, mas todas usam o Git por baixo dos panos.</p>
+                    
                     <img src="images/aula4_git_vs_github.png" alt="Logo do Git ao lado do logo do GitHub, explicando a diferença entre ferramenta e plataforma.">
+
+                    <div class="destaque">
+                        <strong>💡 Analogia prática:</strong>
+                        <ul>
+                            <li><strong>Git</strong> é como o Microsoft Word instalado no seu computador</li>
+                            <li><strong>GitHub</strong> é como o OneDrive ou Google Drive onde você armazena e compartilha documentos</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <!-- MÓDULO 3 -->
             <div class="module">
                 <h2>Módulo 3: Na Prática - Colaborando em um Projeto</h2>
-                 <div class="aula">
+                
+                <div class="aula">
                     <h3>Aula 5: O Mapa do Projeto - Entendendo o GitFlow</h3>
-                    <p>O <strong>GitFlow</strong> é o "mapa de tráfego" do projeto. Ele define branches com propósitos claros: <code>main</code> para produção, <code>develop</code> para desenvolvimento, e <code>feature</code> para novas funcionalidades. Seu trabalho sempre começará em uma branch <code>feature</code> que nasce da <code>develop</code>.</p>
+                    <p>Antes de colocarmos a mão na massa, precisamos entender o "mapa de tráfego" do nosso projeto. Não criamos branches (ramificações) de qualquer maneira. Usamos um modelo de organização chamado <strong>GitFlow</strong>.</p>
+
+                    <div class="destaque">
+                        <strong>Analogia:</strong> Pense no GitFlow como as rotas e procedimentos de uma mina. Existem vias principais para o transporte pesado (versões estáveis), vias de acesso para desenvolvimento de novas áreas (funcionalidades) e desvios rápidos para reparos emergenciais (correções). Cada veículo (desenvolvedor) sabe exatamente qual rota seguir para não causar acidentes ou bloqueios.
+                    </div>
+
+                    <p>O GitFlow define um conjunto de branches com propósitos específicos:</p>
+
+                    <ul>
+                        <li><strong><code>main</code>:</strong> A branch principal. Ela representa a <strong>versão oficial, estável e em produção</strong>. Ninguém trabalha diretamente aqui. Ela só recebe o código que já foi testado e aprovado. É a nossa "planta mestra" arquivada.</li>
+                        <li><strong><code>develop</code>:</strong> A branch de desenvolvimento. É aqui que todas as novas funcionalidades são integradas. Ela é o "canteiro de obras" principal, onde o trabalho do dia a dia acontece.</li>
+                        <li><strong>Branches de Funcionalidade (<code>feature/...</code>):</strong> São criadas a partir da <code>develop</code>. É aqui que você trabalha.
+                            <ul>
+                                <li>Exemplo: <code>feature/relatorio-geologico-automatico</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Branches de Lançamento (<code>release/...</code>):</strong> Quando a <code>develop</code> tem funcionalidades suficientes para uma nova versão, cria-se uma branch de <code>release</code>. Nela, apenas se fazem pequenos ajustes e correções finais antes do lançamento oficial.</li>
+                        <li><strong>Branches de Correção (<code>hotfix/...</code>):</strong> Se um bug crítico é encontrado na versão em produção (<code>main</code>), uma branch de <code>hotfix</code> é criada a partir da <code>main</code> para uma correção urgente.</li>
+                    </ul>
+
+                    <p><strong>Para você, colaborador, o mais importante é:</strong> seu trabalho sempre começará em uma branch <code>feature</code> (ou <code>fix</code>, <code>docs</code>, etc.) que nasce da <code>develop</code>.</p>
+                    
                     <img src="images/aula5_gitflow.png" alt="Diagrama simplificado do GitFlow mostrando as branches main, develop e feature.">
+
+                    <div class="sucesso">
+                        <strong>✅ Nota importante sobre nomenclatura:</strong> A branch principal deve ser chamada de <code>main</code>. Em repositórios mais antigos, você pode encontrar o nome <code>master</code>, mas essa é uma nomenclatura antiga que está sendo substituída.
+                    </div>
                 </div>
+
                 <div class="aula">
                     <h3>Aula 6: Fazendo sua cópia e sugerindo mudanças (Fork e Branch)</h3>
-                    <p>O processo é seguro: primeiro, você faz um <strong>Fork</strong> (sua cópia do projeto no GitHub). Depois, dentro do seu projeto, você cria uma <strong>Branch</strong> (uma ramificação da <code>develop</code>) para trabalhar isoladamente na sua mudança.</p>
-                     <img src="images/aula6_fork_branch.png" alt="Diagrama do fluxo de Fork e criação de uma Branch.">
+                    <p>Você nunca trabalha diretamente na versão oficial. O processo é seguro e se divide em etapas:</p>
+
+                    <h4>1. Fork (Bifurcação)</h4>
+                    <p>O primeiro passo é criar um "fork" do repositório oficial.</p>
+                    <div class="destaque">
+                        <strong>Analogia:</strong> "Fork" é como criar sua própria cópia de segurança de todo o projeto em sua área pessoal dentro do GitHub. É como se você dissesse: "Vou pegar o arquivo mestre inteiro e levar uma cópia para o meu departamento, onde tenho total controle". Este "fork" ainda é um repositório remoto, mas é seu.
+                    </div>
+
+                    <h4>2. Clone (Clonar)</h4>
+                    <p>Depois de fazer o fork, você precisa baixar essa cópia para o seu computador:</p>
+                    <div class="command-example">
+<span class="prompt">$</span> <span class="command">git clone https://github.com/SEU-USUARIO/nome-do-projeto.git</span>
+<span class="prompt">$</span> <span class="command">cd nome-do-projeto</span>
+                    </div>
+
+                    <h4>3. Branch (Ramificação)</h4>
+                    <p>Agora, dentro do seu projeto, você cria uma "branch".</p>
+                    <div class="destaque">
+                        <strong>Analogia:</strong> Uma "branch" é como usar uma <strong>folha de papel vegetal</strong> sobre a planta original para desenhar uma sugestão. Você não risca o documento principal. Você cria uma "ramificação" temporária para trabalhar na sua ideia.
+                    </div>
+
+                    <p>Exemplo de criação de branch:</p>
+                    <div class="command-example">
+<span class="prompt">$</span> <span class="command">git checkout develop</span>
+<span class="prompt">$</span> <span class="command">git checkout -b feature/adicionar-mapa-de-risco</span>
+                    </div>
+
+                    <p>Esse método garante que o projeto principal (<code>main</code> branch) permaneça sempre estável e funcional.</p>
+                    
+                    <img src="images/aula6_fork_branch.png" alt="Diagrama do fluxo de Fork e criação de uma Branch.">
                 </div>
+
                 <div class="aula">
                     <h3>Aula 7: Salvando e Descrevendo seu Trabalho (Commit e Conventional Commits)</h3>
-                    <p>Cada "ponto de salvamento" é um <strong>commit</strong>. Para padronizar, usamos o <strong>Conventional Commits</strong>, com uma mensagem clara como <code>feat(requisitos): adiciona critério de aceitação</code>. Isso cria um histórico limpo e compreensível.</p>
+                    <p>Enquanto trabalha na sua branch, você precisa salvar seu progresso. Cada "ponto de salvamento" no Git é chamado de <strong>commit</strong>.</p>
+
+                    <div class="destaque">
+                        <strong>Analogia:</strong> Um "commit" é como preencher uma <strong>ficha de alteração</strong> para cada mudança significativa que você faz. Em vez de apenas salvar, você salva e descreve <em>o que</em> mudou e <em>por quê</em>.
+                    </div>
+
+                    <h4>Conventional Commits</h4>
+                    <p>Uma boa mensagem de commit é fundamental. Para padronizar isso, usamos um padrão chamado <strong>Conventional Commits</strong>. Ele formata a mensagem para que tanto humanos quanto máquinas possam entendê-la. A estrutura é:</p>
+
+                    <pre><code>&lt;tipo&gt;[escopo opcional]: &lt;descrição&gt;
+
+[corpo opcional]
+
+[rodapé opcional]</code></pre>
+
+                    <h4>Tipos mais comuns:</h4>
+                    <ul>
+                        <li><strong>feat:</strong> Uma nova funcionalidade</li>
+                        <li><strong>fix:</strong> Correção de um bug</li>
+                        <li><strong>docs:</strong> Alterações apenas na documentação</li>
+                        <li><strong>style:</strong> Mudanças que não afetam o significado do código (espaços, formatação)</li>
+                        <li><strong>refactor:</strong> Mudança no código que não corrige bug nem adiciona funcionalidade</li>
+                        <li><strong>test:</strong> Adição ou correção de testes</li>
+                        <li><strong>chore:</strong> Mudanças em ferramentas, configurações, dependências</li>
+                    </ul>
+
+                    <h4>Exemplos práticos para o seu contexto:</h4>
+                    <div class="command-example">
+<span class="prompt">$</span> <span class="command">git add .</span>
+<span class="prompt">$</span> <span class="command">git commit -m "feat(requisitos): adiciona critério de aceitação para relatório de perfuração"</span>
+
+<span class="prompt">$</span> <span class="command">git commit -m "fix(documentacao): corrige link quebrado no manual do usuário"</span>
+
+<span class="prompt">$</span> <span class="command">git commit -m "docs(readme): melhora a descrição do projeto e como executá-lo"</span>
+                    </div>
+
+                    <p>Fazer commits pequenos e bem descritos cria um histórico limpo e compreensível.</p>
+                    
                     <img src="images/aula7_conventional_commit.png" alt="Ilustração de uma etiqueta de commit com tipo, escopo e descrição.">
+
+                    <div class="sucesso">
+                        <strong>✅ Boas práticas para commits:</strong>
+                        <ul>
+                            <li>Faça commits pequenos e frequentes</li>
+                            <li>Cada commit deve representar uma unidade lógica de mudança</li>
+                            <li>Use o imperativo na descrição: "adiciona" ao invés de "adicionado"</li>
+                            <li>A primeira linha deve ter no máximo 50 caracteres</li>
+                            <li>Se necessário, adicione um corpo explicativo após uma linha em branco</li>
+                        </ul>
+                    </div>
                 </div>
+
                 <div class="aula">
                     <h3>Aula 8: Enviando suas sugestões para o time (Push e Pull Request)</h3>
-                    <p>Após fazer seus commits, você faz um <strong>Push</strong> para enviar sua branch ao GitHub. Em seguida, abre um <strong>Pull Request</strong> (PR), que é o pedido formal para que sua contribuição seja revisada e integrada à branch <code>develop</code>.</p>
+                    <p>Seu trabalho está pronto na sua branch local. Como você o apresenta para a equipe?</p>
+
+                    <h4>1. Push (Empurrar)</h4>
+                    <p>Primeiro, você faz um "push".</p>
+                    <div class="destaque">
+                        <strong>Analogia:</strong> "Push" é o ato de pegar a sua folha de papel vegetal com o desenho (sua branch) e levá-la até a "sala de projetos online" (seu repositório fork no GitHub), deixando-a visível para outros.
+                    </div>
+
+                    <div class="command-example">
+<span class="prompt">$</span> <span class="command">git push origin feature/adicionar-mapa-de-risco</span>
+                    </div>
+
+                    <h4>2. Pull Request (Pedido de Integração)</h4>
+                    <p>Este é o passo mais importante da colaboração.</p>
+                    <div class="destaque">
+                        <strong>Analogia:</strong> O "Pull Request" (PR) é o seu pedido formal. Você vai até a equipe e diz: "Pessoal, aqui está minha sugestão. Por favor, revisem meu trabalho. Se estiver tudo certo, podemos integrá-lo (fazer o merge) à planta oficial".
+                    </div>
+
+                    <p>Dentro do Pull Request no GitHub, a equipe pode:</p>
+                    <ul>
+                        <li>Ver exatamente o que você alterou (linhas adicionadas em verde, removidas em vermelho)</li>
+                        <li>Deixar comentários em linhas específicas do código</li>
+                        <li>Solicitar ajustes ou melhorias</li>
+                        <li>Aprovar a integração</li>
+                        <li>Fazer o merge (integração) para a branch <code>develop</code></li>
+                    </ul>
+                    
                     <img src="images/aula8_pull_request.png" alt="Interface de um Pull Request no GitHub.">
+
+                    <div class="sucesso">
+                        <strong>✅ Boas práticas para Pull Requests:</strong>
+                        <ul>
+                            <li>Dê um título claro e descritivo</li>
+                            <li>Descreva o que foi feito e por quê</li>
+                            <li>Referencie issues relacionadas (ex: "Closes #123")</li>
+                            <li>Mantenha o PR focado em uma única funcionalidade ou correção</li>
+                            <li>Responda aos comentários dos revisores de forma construtiva</li>
+                            <li>Mantenha seu PR atualizado com a branch de destino</li>
+                        </ul>
+                    </div>
                 </div>
+
                 <div class="aula">
                     <h3>Aula 9: Entendendo as Versões do Software (Versionamento Semântico - SemVer)</h3>
-                    <p>O <strong>Versionamento Semântico (SemVer)</strong> usa o formato <strong>MAJOR.MINOR.PATCH</strong> (ex: 1.4.2) para comunicar o tipo de mudança em uma nova versão. <strong>MAJOR</strong> para quebras de compatibilidade, <strong>MINOR</strong> para novas funcionalidades, e <strong>PATCH</strong> para correções.</p>
+                    <p>Quando um Pull Request é aprovado e integrado, ele pode gerar uma nova versão do software. Mas o que significa "versão 2.5.1"? Para isso, usamos o <strong>Versionamento Semântico (SemVer)</strong>.</p>
+
+                    <p>O formato é <strong>MAJOR.MINOR.PATCH</strong> (Ex: <code>1.4.2</code>).</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Quando incrementar</th>
+                                <th>Exemplo no contexto de mineração</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>MAJOR</strong> (1.x.x)</td>
+                                <td>Mudanças que quebram a compatibilidade com versões anteriores</td>
+                                <td>Mudar o sistema de coordenadas de um mapa. Os dados antigos não são mais compatíveis com o novo formato. Requer atenção de todos.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MINOR</strong> (x.4.x)</td>
+                                <td>Novas funcionalidades adicionadas de forma retrocompatível</td>
+                                <td>Adicionar um novo tipo de relatório ao sistema. Os relatórios antigos continuam funcionando, mas agora há uma opção nova.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PATCH</strong> (x.x.2)</td>
+                                <td>Correções de bugs retrocompatíveis</td>
+                                <td>Corrigir um erro de cálculo em um relatório existente. A funcionalidade é a mesma, mas agora está correta.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Os <em>Conventional Commits</em> que vimos antes ajudam a automatizar isso! Se um commit é do tipo <code>feat</code>, o sistema sabe que deve incrementar a versão MINOR. Se for <code>fix</code>, incrementa a PATCH.</p>
+                    
                     <img src="images/aula9_semver.png" alt="Infográfico explicando as partes do Versionamento Semântico: Major, Minor e Patch.">
+
+                    <h4>Exemplos de evolução de versões:</h4>
+                    <ul>
+                        <li><code>1.0.0</code> → <code>1.0.1</code>: Correção de bug (PATCH)</li>
+                        <li><code>1.0.1</code> → <code>1.1.0</code>: Nova funcionalidade (MINOR)</li>
+                        <li><code>1.9.5</code> → <code>2.0.0</code>: Mudança que quebra compatibilidade (MAJOR)</li>
+                    </ul>
+
+                    <div class="destaque">
+                        <strong>💡 Versão 0.x.x:</strong> Versões que começam com 0 (ex: 0.5.2) indicam que o software ainda está em desenvolvimento inicial e pode ter mudanças significativas a qualquer momento.
+                    </div>
                 </div>
             </div>
+
+            <!-- SEÇÃO: CRIANDO UM REPOSITÓRIO NO GITHUB -->
+            <div class="section">
+                <h2>Criando seu Primeiro Repositório no GitHub</h2>
+                <p>Agora que você entende os conceitos, vamos ao passo a passo prático para criar um repositório no GitHub.</p>
+
+                <h3>Passo 1: Acesse o GitHub</h3>
+                <ol>
+                    <li>Acesse <a href="https://github.com" target="_blank">https://github.com</a></li>
+                    <li>Faça login na sua conta (ou crie uma conta gratuita se ainda não tiver)</li>
+                </ol>
+
+                <h3>Passo 2: Criar um Novo Repositório</h3>
+                <ol>
+                    <li>Clique no botão <strong>"+"</strong> no canto superior direito</li>
+                    <li>Selecione <strong>"New repository"</strong></li>
+                    <li>Preencha as informações:
+                        <ul>
+                            <li><strong>Repository name:</strong> Nome do seu projeto (ex: <code>meu-primeiro-projeto</code>)</li>
+                            <li><strong>Description:</strong> Breve descrição do que é o projeto</li>
+                            <li><strong>Public/Private:</strong> Escolha se o repositório será público ou privado</li>
+                            <li><strong>Initialize with README:</strong> Marque esta opção para criar um arquivo README.md inicial</li>
+                            <li><strong>.gitignore:</strong> Escolha um template se aplicável (ex: Python, Node, etc.)</li>
+                            <li><strong>License:</strong> Escolha uma licença se for um projeto open source</li>
+                        </ul>
+                    </li>
+                    <li>Clique em <strong>"Create repository"</strong></li>
+                </ol>
+
+                <h3>Passo 3: Clonar o Repositório para sua Máquina</h3>
+                <p>Agora que o repositório foi criado no GitHub, você precisa cloná-lo para trabalhar localmente:</p>
+                <div class="command-example">
+<span class="prompt">$</span> <span class="command">git clone https://github.com/SEU-USUARIO/meu-primeiro-projeto.git</span>
+<span class="prompt">$</span> <span class="command">cd meu-primeiro-projeto</span>
+                </div>
+
+                <h3>Passo 4: Fazer Alterações e Enviar</h3>
+                <div class="command-example">
+<span class="comment"># Criar ou editar arquivos</span>
+<span class="prompt">$</span> <span class="command">echo "# Meu Primeiro Projeto" > README.md</span>
+
+<span class="comment"># Adicionar arquivos ao staging</span>
+<span class="prompt">$</span> <span class="command">git add .</span>
+
+<span class="comment"># Fazer commit</span>
+<span class="prompt">$</span> <span class="command">git commit -m "docs: atualiza README com descrição do projeto"</span>
+
+<span class="comment"># Enviar para o GitHub</span>
+<span class="prompt">$</span> <span class="command">git push origin main</span>
+                </div>
+
+                <div class="sucesso">
+                    <strong>✅ Pronto!</strong> Suas alterações agora estão no GitHub e visíveis para toda a equipe.
+                </div>
+            </div>
+
+            <!-- SEÇÃO: COMANDOS GIT ESSENCIAIS -->
+            <div class="section">
+                <h2>Comandos Git Essenciais para o Trabalho Local</h2>
+                <p>Aqui estão os comandos mais importantes que você usará no dia a dia ao trabalhar com sua cópia local do repositório.</p>
+
+                <h3>Configuração Inicial</h3>
+                <div class="command-example">
+<span class="comment"># Configurar seu nome (aparecerá nos commits)</span>
+<span class="prompt">$</span> <span class="command">git config --global user.name "Seu Nome"</span>
+
+<span class="comment"># Configurar seu e-mail</span>
+<span class="prompt">$</span> <span class="command">git config --global user.email "seu.email@empresa.com"</span>
+
+<span class="comment"># Configurar branch padrão como 'main'</span>
+<span class="prompt">$</span> <span class="command">git config --global init.defaultBranch main</span>
+                </div>
+
+                <h3>Trabalhando com Branches</h3>
+                <div class="command-example">
+<span class="comment"># Listar todas as branches</span>
+<span class="prompt">$</span> <span class="command">git branch</span>
+
+<span class="comment"># Criar uma nova branch</span>
+<span class="prompt">$</span> <span class="command">git branch feature/nova-funcionalidade</span>
+
+<span class="comment"># Mudar para uma branch</span>
+<span class="prompt">$</span> <span class="command">git checkout feature/nova-funcionalidade</span>
+
+<span class="comment"># Criar e mudar para uma nova branch (atalho)</span>
+<span class="prompt">$</span> <span class="command">git checkout -b feature/nova-funcionalidade</span>
+
+<span class="comment"># Deletar uma branch local</span>
+<span class="prompt">$</span> <span class="command">git branch -d feature/antiga-funcionalidade</span>
+                </div>
+
+                <h3>Verificando o Status e Histórico</h3>
+                <div class="command-example">
+<span class="comment"># Ver o status dos arquivos (modificados, não rastreados, etc.)</span>
+<span class="prompt">$</span> <span class="command">git status</span>
+
+<span class="comment"># Ver o histórico de commits</span>
+<span class="prompt">$</span> <span class="command">git log</span>
+
+<span class="comment"># Ver o histórico de forma compacta</span>
+<span class="prompt">$</span> <span class="command">git log --oneline</span>
+
+<span class="comment"># Ver diferenças entre arquivos modificados</span>
+<span class="prompt">$</span> <span class="command">git diff</span>
+                </div>
+
+                <h3>Salvando Alterações (Staging e Commit)</h3>
+                <div class="command-example">
+<span class="comment"># Adicionar um arquivo específico ao staging</span>
+<span class="prompt">$</span> <span class="command">git add arquivo.txt</span>
+
+<span class="comment"># Adicionar todos os arquivos modificados</span>
+<span class="prompt">$</span> <span class="command">git add .</span>
+
+<span class="comment"># Fazer commit das alterações</span>
+<span class="prompt">$</span> <span class="command">git commit -m "feat: adiciona nova funcionalidade"</span>
+
+<span class="comment"># Adicionar e fazer commit em um único comando (apenas arquivos já rastreados)</span>
+<span class="prompt">$</span> <span class="command">git commit -am "fix: corrige bug no cálculo"</span>
+                </div>
+
+                <h3>Sincronizando com o Repositório Remoto</h3>
+                <div class="command-example">
+<span class="comment"># Baixar alterações do repositório remoto (sem fazer merge)</span>
+<span class="prompt">$</span> <span class="command">git fetch origin</span>
+
+<span class="comment"># Baixar e integrar alterações da branch remota</span>
+<span class="prompt">$</span> <span class="command">git pull origin develop</span>
+
+<span class="comment"># Enviar commits locais para o repositório remoto</span>
+<span class="prompt">$</span> <span class="command">git push origin feature/minha-branch</span>
+
+<span class="comment"># Enviar e definir a branch remota como upstream (primeira vez)</span>
+<span class="prompt">$</span> <span class="command">git push -u origin feature/minha-branch</span>
+                </div>
+
+                <h3>Desfazendo Alterações</h3>
+                <div class="command-example">
+<span class="comment"># Descartar alterações em um arquivo (antes do add)</span>
+<span class="prompt">$</span> <span class="command">git checkout -- arquivo.txt</span>
+
+<span class="comment"># Remover arquivo do staging (depois do add, antes do commit)</span>
+<span class="prompt">$</span> <span class="command">git reset HEAD arquivo.txt</span>
+
+<span class="comment"># Desfazer o último commit (mantendo as alterações)</span>
+<span class="prompt">$</span> <span class="command">git reset --soft HEAD~1</span>
+
+<span class="comment"># Desfazer o último commit (descartando as alterações)</span>
+<span class="prompt">$</span> <span class="command">git reset --hard HEAD~1</span>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Atenção:</strong> Comandos como <code>git reset --hard</code> descartam alterações permanentemente. Use com cuidado!
+                </div>
+
+                <h3>Resolvendo Conflitos</h3>
+                <p>Conflitos acontecem quando duas pessoas editam a mesma parte de um arquivo. O Git marca essas áreas:</p>
+                <pre><code><<<<<<< HEAD
+Sua versão do código
+=======
+Versão do código de outra pessoa
+>>>>>>> branch-name</code></pre>
+
+                <p>Para resolver:</p>
+                <ol>
+                    <li>Abra o arquivo e edite manualmente, escolhendo qual versão manter</li>
+                    <li>Remova os marcadores (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</li>
+                    <li>Adicione o arquivo resolvido: <code>git add arquivo.txt</code></li>
+                    <li>Finalize o merge: <code>git commit</code></li>
+                </ol>
+            </div>
+
+            <!-- SEÇÃO: COMPARAÇÃO DE TIPOS DE ARQUIVO -->
+            <div class="section">
+                <h2>Controle de Versão: Arquivos de Texto vs. Formatos Ricos</h2>
+                <p>Nem todos os arquivos se beneficiam igualmente do controle de versão. Entender as diferenças é fundamental para trabalhar de forma eficiente.</p>
+
+                <h3>Arquivos de Texto Puro (Plain Text)</h3>
+                <p>São arquivos que contêm apenas caracteres legíveis, sem formatação especial. O Git funciona <strong>perfeitamente</strong> com eles.</p>
+
+                <h4>Exemplos:</h4>
+                <ul>
+                    <li>Código-fonte (.py, .js, .java, .c, .cpp, etc.)</li>
+                    <li>Markdown (.md)</li>
+                    <li>HTML, CSS, XML, JSON</li>
+                    <li>Arquivos de configuração (.conf, .ini, .yaml, .env)</li>
+                    <li>Scripts de shell (.sh, .bash)</li>
+                    <li>Arquivos de texto simples (.txt)</li>
+                </ul>
+
+                <div class="sucesso">
+                    <strong>✅ Vantagens com Git:</strong>
+                    <ul>
+                        <li><strong>Diff linha por linha:</strong> O Git mostra exatamente quais linhas foram alteradas</li>
+                        <li><strong>Merge inteligente:</strong> Pode combinar alterações de diferentes pessoas automaticamente</li>
+                        <li><strong>Histórico legível:</strong> Você pode ver o conteúdo de qualquer versão anterior</li>
+                        <li><strong>Tamanho pequeno:</strong> Arquivos de texto ocupam pouco espaço</li>
+                        <li><strong>Resolução de conflitos:</strong> Conflitos podem ser resolvidos manualmente de forma clara</li>
+                    </ul>
+                </div>
+
+                <h3>Arquivos Binários e Formatos Ricos</h3>
+                <p>São arquivos que contêm dados em formato não legível diretamente por humanos. O Git pode armazená-los, mas com <strong>limitações significativas</strong>.</p>
+
+                <h4>Exemplos:</h4>
+                <ul>
+                    <li>Documentos do Microsoft Office (.docx, .xlsx, .pptx)</li>
+                    <li>PDFs (.pdf)</li>
+                    <li>Imagens (.png, .jpg, .gif, .svg)</li>
+                    <li>Vídeos (.mp4, .avi, .mov)</li>
+                    <li>Áudio (.mp3, .wav)</li>
+                    <li>Arquivos compactados (.zip, .rar, .tar.gz)</li>
+                    <li>Executáveis (.exe, .dll, .so)</li>
+                </ul>
+
+                <div class="destaque">
+                    <strong>⚠️ Limitações com Git:</strong>
+                    <ul>
+                        <li><strong>Sem diff visual:</strong> O Git não consegue mostrar o que mudou dentro do arquivo</li>
+                        <li><strong>Sem merge automático:</strong> Se duas pessoas editarem, você terá que escolher uma versão completa</li>
+                        <li><strong>Tamanho do repositório:</strong> Cada versão do arquivo é armazenada integralmente, aumentando muito o tamanho</li>
+                        <li><strong>Histórico opaco:</strong> Não é possível ver o conteúdo de versões antigas sem baixá-las</li>
+                        <li><strong>Conflitos difíceis:</strong> Resolver conflitos significa escolher um arquivo inteiro</li>
+                    </ul>
+                </div>
+
+                <h3>Tabela Comparativa</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Arquivos de Texto (.md, .py, .txt)</th>
+                            <th>Arquivos Binários (.docx, .pdf, .xlsx)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Visualização de diferenças</strong></td>
+                            <td>✅ Linha por linha, muito claro</td>
+                            <td>❌ Apenas "arquivo mudou"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Merge automático</strong></td>
+                            <td>✅ Git combina alterações inteligentemente</td>
+                            <td>❌ Impossível, escolha uma versão</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tamanho do repositório</strong></td>
+                            <td>✅ Pequeno, apenas diferenças são armazenadas</td>
+                            <td>❌ Grande, cada versão completa é armazenada</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Histórico navegável</strong></td>
+                            <td>✅ Pode ver qualquer linha em qualquer momento</td>
+                            <td>❌ Precisa baixar o arquivo inteiro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resolução de conflitos</strong></td>
+                            <td>✅ Edição manual clara e precisa</td>
+                            <td>❌ Escolher versão A ou B inteira</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Colaboração simultânea</strong></td>
+                            <td>✅ Múltiplas pessoas, mesma área</td>
+                            <td>❌ Última pessoa a fazer push "ganha"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Recomendações Práticas</h3>
+
+                <h4>✅ Use Git para:</h4>
+                <ul>
+                    <li>Todo código-fonte</li>
+                    <li>Documentação em Markdown</li>
+                    <li>Arquivos de configuração</li>
+                    <li>Scripts e automações</li>
+                    <li>Dados em formatos texto (CSV, JSON, XML)</li>
+                </ul>
+
+                <h4>⚠️ Evite ou tenha cuidado com:</h4>
+                <ul>
+                    <li><strong>Documentos do Office:</strong> Considere usar Google Docs ou Office 365 para colaboração em tempo real</li>
+                    <li><strong>Imagens grandes:</strong> Use serviços de armazenamento de mídia (S3, CDN) e referencie no código</li>
+                    <li><strong>Vídeos e áudio:</strong> Nunca coloque no Git. Use serviços especializados</li>
+                    <li><strong>Arquivos compilados:</strong> Adicione ao <code>.gitignore</code> para não versionar</li>
+                </ul>
+
+                <h4>💡 Alternativas para Documentos Colaborativos:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Documento</th>
+                            <th>Melhor Ferramenta</th>
+                            <th>Por quê</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Documentação técnica</td>
+                            <td>Markdown no Git</td>
+                            <td>Versionamento perfeito, fácil de revisar</td>
+                        </tr>
+                        <tr>
+                            <td>Documentos de texto colaborativo</td>
+                            <td>Google Docs, Notion</td>
+                            <td>Edição simultânea em tempo real</td>
+                        </tr>
+                        <tr>
+                            <td>Planilhas</td>
+                            <td>Google Sheets, Excel Online</td>
+                            <td>Colaboração em tempo real, histórico de versões</td>
+                        </tr>
+                        <tr>
+                            <td>Apresentações</td>
+                            <td>Google Slides, PowerPoint Online</td>
+                            <td>Edição colaborativa, comentários</td>
+                        </tr>
+                        <tr>
+                            <td>Diagramas</td>
+                            <td>Mermaid (texto), Draw.io</td>
+                            <td>Mermaid é texto puro, versionável</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Caso Especial: Markdown vs. Word</h3>
+                <p>Para documentação técnica, o <strong>Markdown</strong> é vastamente superior ao Word quando usado com Git:</p>
+
+                <div class="sucesso">
+                    <strong>✅ Markdown (.md):</strong>
+                    <ul>
+                        <li>Texto puro, totalmente versionável</li>
+                        <li>Diff e merge funcionam perfeitamente</li>
+                        <li>Pode ser convertido para HTML, PDF, Word</li>
+                        <li>Leve e rápido</li>
+                        <li>Funciona em qualquer editor</li>
+                    </ul>
+                </div>
+
+                <div class="destaque">
+                    <strong>⚠️ Word (.docx):</strong>
+                    <ul>
+                        <li>Arquivo binário (XML compactado)</li>
+                        <li>Git não mostra diferenças úteis</li>
+                        <li>Merge impossível</li>
+                        <li>Aumenta muito o tamanho do repositório</li>
+                        <li>Requer software específico para abrir</li>
+                    </ul>
+                </div>
+
+                <p><strong>Conclusão:</strong> Para documentação que será versionada com Git, sempre prefira Markdown. Para documentos colaborativos com formatação rica, use ferramentas online como Google Docs.</p>
+            </div>
+
+            <!-- SEÇÃO: RESUMO DO FLUXO -->
+            <div class="section">
+                <h2>Resumo: Fluxo Completo de Colaboração em 6 Passos</h2>
+                <p>Agora que você conhece todos os conceitos, aqui está o fluxo completo que você seguirá no dia a dia:</p>
+
+                <div class="fluxo-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Fork</h4>
+                        <p>Crie sua cópia do projeto no GitHub</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Clone</h4>
+                        <p>Baixe o repositório para sua máquina</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Branch</h4>
+                        <p>Crie uma ramificação da <code>develop</code></p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Commit</h4>
+                        <p>Salve suas alterações com mensagens claras</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h4>Push</h4>
+                        <p>Envie sua branch para o GitHub</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h4>Pull Request</h4>
+                        <p>Peça revisão e integração à <code>develop</code></p>
+                    </div>
+                </div>
+
+                <h3>Exemplo Completo com Comandos</h3>
+                <div class="command-example">
+<span class="comment"># 1. Fork: Feito na interface web do GitHub</span>
+
+<span class="comment"># 2. Clone: Baixar o repositório</span>
+<span class="prompt">$</span> <span class="command">git clone https://github.com/SEU-USUARIO/projeto.git</span>
+<span class="prompt">$</span> <span class="command">cd projeto</span>
+
+<span class="comment"># 3. Branch: Criar ramificação</span>
+<span class="prompt">$</span> <span class="command">git checkout develop</span>
+<span class="prompt">$</span> <span class="command">git checkout -b feature/minha-contribuicao</span>
+
+<span class="comment"># Trabalhar nos arquivos...</span>
+
+<span class="comment"># 4. Commit: Salvar alterações</span>
+<span class="prompt">$</span> <span class="command">git add .</span>
+<span class="prompt">$</span> <span class="command">git commit -m "feat(requisitos): adiciona novos critérios de aceitação"</span>
+
+<span class="comment"># 5. Push: Enviar para o GitHub</span>
+<span class="prompt">$</span> <span class="command">git push origin feature/minha-contribuicao</span>
+
+<span class="comment"># 6. Pull Request: Feito na interface web do GitHub</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: RECURSOS E REFERÊNCIAS -->
+            <div class="section">
+                <h2>Recursos e Referências</h2>
+                <p>Aprofunde seus conhecimentos com estes recursos oficiais e materiais de apoio:</p>
+
+                <div class="referencias">
+                    <h3>📚 Documentação Oficial</h3>
+                    <ul>
+                        <li><strong>Git:</strong> <a href="https://git-scm.com/doc" target="_blank">https://git-scm.com/doc</a> - Documentação completa do Git</li>
+                        <li><strong>GitHub Docs:</strong> <a href="https://docs.github.com" target="_blank">https://docs.github.com</a> - Guias e tutoriais do GitHub</li>
+                        <li><strong>Pro Git Book:</strong> <a href="https://git-scm.com/book/pt-br/v2" target="_blank">https://git-scm.com/book/pt-br/v2</a> - Livro gratuito em português</li>
+                    </ul>
+
+                    <h3>🔖 Padrões e Convenções</h3>
+                    <ul>
+                        <li><strong>Conventional Commits:</strong> <a href="https://www.conventionalcommits.org/pt-br/v1.0.0/" target="_blank">https://www.conventionalcommits.org</a> - Padrão para mensagens de commit</li>
+                        <li><strong>Semantic Versioning (SemVer):</strong> <a href="https://semver.org/lang/pt-BR/" target="_blank">https://semver.org/lang/pt-BR/</a> - Versionamento semântico em português</li>
+                        <li><strong>GitFlow Cheatsheet:</strong> <a href="https://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html" target="_blank">https://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html</a> - Guia visual do GitFlow</li>
+                    </ul>
+
+                    <h3>🛠️ Ferramentas Úteis</h3>
+                    <ul>
+                        <li><strong>GitHub Desktop:</strong> <a href="https://desktop.github.com/" target="_blank">https://desktop.github.com/</a> - Interface gráfica para Git</li>
+                        <li><strong>GitKraken:</strong> <a href="https://www.gitkraken.com/" target="_blank">https://www.gitkraken.com/</a> - Cliente Git visual avançado</li>
+                        <li><strong>Visual Studio Code:</strong> <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a> - Editor com excelente integração Git</li>
+                    </ul>
+
+                    <h3>📖 Tutoriais Interativos</h3>
+                    <ul>
+                        <li><strong>Learn Git Branching:</strong> <a href="https://learngitbranching.js.org/?locale=pt_BR" target="_blank">https://learngitbranching.js.org/?locale=pt_BR</a> - Aprenda Git de forma visual e interativa</li>
+                        <li><strong>GitHub Skills:</strong> <a href="https://skills.github.com/" target="_blank">https://skills.github.com/</a> - Cursos práticos do GitHub</li>
+                    </ul>
+
+                    <h3>🎥 Vídeos e Cursos</h3>
+                    <ul>
+                        <li><strong>Git e GitHub para Iniciantes:</strong> Procure por cursos gratuitos em plataformas como YouTube, Coursera e Udemy</li>
+                        <li><strong>Curso Git e GitHub (Gustavo Guanabara):</strong> Curso completo em português no YouTube</li>
+                    </ul>
+                </div>
+
+                <div class="sucesso">
+                    <h3>🎯 Próximos Passos</h3>
+                    <p>Agora que você concluiu o curso, recomendamos:</p>
+                    <ol>
+                        <li><strong>Praticar:</strong> Crie um repositório de teste e experimente todos os comandos</li>
+                        <li><strong>Colaborar:</strong> Faça seu primeiro Pull Request em um projeto real da equipe</li>
+                        <li><strong>Explorar:</strong> Visite repositórios públicos no GitHub para ver como outros projetos se organizam</li>
+                        <li><strong>Aprofundar:</strong> Leia o Pro Git Book para entender conceitos avançados</li>
+                        <li><strong>Compartilhar:</strong> Ensine o que aprendeu para outros colaboradores</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer style="text-align: center; padding: 30px; color: #666; border-top: 2px solid var(--border-color); margin-top: 40px;">
+                <p><strong>Curso de Controle de Versão para Colaboradores</strong></p>
+                <p>Material educacional desenvolvido para profissionais de mineração e outras áreas que colaboram com projetos de software.</p>
+                <p style="margin-top: 20px;">
+                    <a href="https://github.com" target="_blank">GitHub</a> • 
+                    <a href="https://git-scm.com" target="_blank">Git</a> • 
+                    <a href="https://www.conventionalcommits.org" target="_blank">Conventional Commits</a> • 
+                    <a href="https://semver.org" target="_blank">SemVer</a>
+                </p>
+            </footer>
+
         </div>
     </div>
 </body>
