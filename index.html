@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Controle de Versão para Colaboradores</title>
+    <style>
+        :root {
+            --primary-color: #0366d6;
+            --secondary-color: #24292e;
+            --background-color: #ffffff;
+            --text-color: #333;
+            --border-color: #e1e4e8;
+            --code-bg-color: #f6f8fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            background-image: url('https://raw.githubusercontent.com/danielkummer/git-flow-cheatsheet/develop/img/git-flow-commands.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.97);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header, .module, .aula {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.4em; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        code {
+            background-color: var(--code-bg-color);
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        strong {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <header>
+                <h1>Bem-vindo ao Curso de Controle de Versão!</h1>
+                <p>Olá! Se você colabora com projetos de software, seja na criação de requisitos, na validação de funcionalidades ou na leitura de documentação, este curso é para você. Vamos desmistificar o "mundo do código" e mostrar como o controle de versão organiza o trabalho de todo o time, incluindo o seu.</p>
+                <p>Usaremos analogias do universo da mineração para tornar tudo mais claro e prático. Ao final, você se sentirá muito mais à vontade para interagir com as equipes de desenvolvimento usando ferramentas como o GitHub.</p>
+            </header>
+
+            <!-- MÓDULO 1 -->
+            <div class="module">
+                <h2>Módulo 1: O Problema - Por que precisamos organizar o trabalho?</h2>
+                <div class="aula">
+                    <h3>Aula 1: O caos dos "arquivos finais"</h3>
+                    <p>Imagine a seguinte situação: a equipe de geologia precisa atualizar um mapa de sondagem crucial para uma nova fase de exploração. Surgem arquivos como <code>mapa_final.docx</code>, <code>mapa_final_agora_vai.docx</code>, <code>mapa_versao_Joao.docx</code>. Qual é o correto? Esse é o problema da falta de um <strong>"ponto central da verdade"</strong>. Trabalhar com cópias de arquivos gera confusão, retrabalho e um alto risco de usar informações desatualizadas.</p>
+                    <img src="images/aula1_caos_arquivos.png" alt="Fluxograma caótico com vários nomes de arquivos confusos.">
+                </div>
+                <div class="aula">
+                    <h3>Aula 2: O que é Controle de Versão?</h3>
+                    <p>Para resolver esse caos, usamos um <strong>Sistema de Controle de Versão (VCS)</strong>. Pense nele como um <strong>"livro de registros geológico"</strong>. Cada alteração é registrada, com data, autor e descrição. Nada é perdido, apenas novas camadas são adicionadas. O sistema mais usado no mundo para isso se chama <strong>Git</strong>.</p>
+                    <img src="images/aula2_camadas_versao.png" alt="Ilustração de camadas de rocha, cada uma com uma etiqueta de versão.">
+                </div>
+            </div>
+
+            <!-- MÓDULO 2 -->
+            <div class="module">
+                <h2>Módulo 2: A Solução - Conhecendo as Ferramentas</h2>
+                <div class="aula">
+                    <h3>Aula 3: O "Armazém Central" e as "Cópias Locais" (Repositórios)</h3>
+                    <p>O <strong>Repositório Remoto</strong> (no GitHub) é o "arquivo técnico central". Cada colaborador pega uma cópia para trabalhar em sua mesa, o <strong>Repositório Local</strong>, sem alterar o original diretamente.</p>
+                    <img src="images/aula3_repositorios.png" alt="Diagrama mostrando um repositório remoto central e vários repositórios locais.">
+                </div>
+                 <div class="aula">
+                    <h3>Aula 4: Apresentando o Git e o GitHub</h3>
+                    <p><strong>Git</strong> é a ferramenta que você instala em seu computador para controlar as versões. <strong>GitHub</strong> é a plataforma online, a "sala de projetos", onde hospedamos os repositórios para colaborar em equipe.</p>
+                    <img src="images/aula4_git_vs_github.png" alt="Logo do Git ao lado do logo do GitHub, explicando a diferença entre ferramenta e plataforma.">
+                </div>
+            </div>
+
+            <!-- MÓDULO 3 -->
+            <div class="module">
+                <h2>Módulo 3: Na Prática - Colaborando em um Projeto</h2>
+                 <div class="aula">
+                    <h3>Aula 5: O Mapa do Projeto - Entendendo o GitFlow</h3>
+                    <p>O <strong>GitFlow</strong> é o "mapa de tráfego" do projeto. Ele define branches com propósitos claros: <code>main</code> para produção, <code>develop</code> para desenvolvimento, e <code>feature</code> para novas funcionalidades. Seu trabalho sempre começará em uma branch <code>feature</code> que nasce da <code>develop</code>.</p>
+                    <img src="images/aula5_gitflow.png" alt="Diagrama simplificado do GitFlow mostrando as branches main, develop e feature.">
+                </div>
+                <div class="aula">
+                    <h3>Aula 6: Fazendo sua cópia e sugerindo mudanças (Fork e Branch)</h3>
+                    <p>O processo é seguro: primeiro, você faz um <strong>Fork</strong> (sua cópia do projeto no GitHub). Depois, dentro do seu projeto, você cria uma <strong>Branch</strong> (uma ramificação da <code>develop</code>) para trabalhar isoladamente na sua mudança.</p>
+                     <img src="images/aula6_fork_branch.png" alt="Diagrama do fluxo de Fork e criação de uma Branch.">
+                </div>
+                <div class="aula">
+                    <h3>Aula 7: Salvando e Descrevendo seu Trabalho (Commit e Conventional Commits)</h3>
+                    <p>Cada "ponto de salvamento" é um <strong>commit</strong>. Para padronizar, usamos o <strong>Conventional Commits</strong>, com uma mensagem clara como <code>feat(requisitos): adiciona critério de aceitação</code>. Isso cria um histórico limpo e compreensível.</p>
+                    <img src="images/aula7_conventional_commit.png" alt="Ilustração de uma etiqueta de commit com tipo, escopo e descrição.">
+                </div>
+                <div class="aula">
+                    <h3>Aula 8: Enviando suas sugestões para o time (Push e Pull Request)</h3>
+                    <p>Após fazer seus commits, você faz um <strong>Push</strong> para enviar sua branch ao GitHub. Em seguida, abre um <strong>Pull Request</strong> (PR), que é o pedido formal para que sua contribuição seja revisada e integrada à branch <code>develop</code>.</p>
+                    <img src="images/aula8_pull_request.png" alt="Interface de um Pull Request no GitHub.">
+                </div>
+                <div class="aula">
+                    <h3>Aula 9: Entendendo as Versões do Software (Versionamento Semântico - SemVer)</h3>
+                    <p>O <strong>Versionamento Semântico (SemVer)</strong> usa o formato <strong>MAJOR.MINOR.PATCH</strong> (ex: 1.4.2) para comunicar o tipo de mudança em uma nova versão. <strong>MAJOR</strong> para quebras de compatibilidade, <strong>MINOR</strong> para novas funcionalidades, e <strong>PATCH</strong> para correções.</p>
+                    <img src="images/aula9_semver.png" alt="Infográfico explicando as partes do Versionamento Semântico: Major, Minor e Patch.">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
